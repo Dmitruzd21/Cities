@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
+
     public static void main(String[] args) {
-        try (ServerSocket serverSocket = new ServerSocket(8989)) { // стартуем сервер один(!) раз
+        try (ServerSocket serverSocket = new ServerSocket(ServerConfig.PORT)) { // стартуем сервер один(!) раз
             System.out.println("Сервер запущен");
             List<Socket> clients = new ArrayList<>();
             String lastCity = "";
@@ -25,7 +26,7 @@ public class Server {
                         lastCity = in.readLine();
                         out.println("OK");
                     } else {
-                        out.println("Последний город: " + lastCity + ", теперь ваша очередь.");
+                        out.println("Последний город: " + lastCity + ". Назовите новый город.");
                         String newCity = in.readLine();
                         if (newCity.toLowerCase().charAt(0) == lastCity.toLowerCase().charAt(lastCity.length() - 1)) {
                             lastCity = newCity;

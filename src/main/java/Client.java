@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Client {
 
-    public static int port = 8989;
-    public static String ip = "127.0.0.1";
+    public static int port = ServerConfig.PORT;
+    public static String ip = ServerConfig.HOST;
 
     public static void main(String[] args) {
 
