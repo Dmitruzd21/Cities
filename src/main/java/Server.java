@@ -16,7 +16,7 @@ public class Server {
             while (true) { // в цикле(!) принимаем подключения
                 try (Socket clientSocket = serverSocket.accept();
                      BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream())) {
+                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
                     clients.add(clientSocket);
                     System.out.println("Подключился новый клиент с портом: " + clientSocket.getPort());
                     System.out.println("К серверу подключилось: " + clients.size() + " клиент/ов.");
@@ -27,7 +27,7 @@ public class Server {
                     } else {
                         out.println("Последний город: " + lastCity + ", теперь ваша очередь.");
                         String newCity = in.readLine();
-                        if (newCity.charAt(0) == lastCity.charAt(lastCity.length() - 1)) {
+                        if (newCity.toLowerCase().charAt(0) == lastCity.toLowerCase().charAt(lastCity.length() - 1)) {
                             lastCity = newCity;
                             out.println("OK");
                         } else {
